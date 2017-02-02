@@ -1,6 +1,6 @@
-var qazy = {};
+window.qazy = window.qazy || {};
 
-qazy.qazy_image = void(0);
+//qazy.qazy_image = "data:image/gif;base64,...";
 
 qazy.view_elements = [];
 
