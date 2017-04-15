@@ -1,7 +1,5 @@
 window.qazy = window.qazy || {};
 
-//qazy.qazy_image = "data:image/gif;base64,...";
-
 qazy.view_elements = [];
 
 qazy.reveal = function(){
@@ -36,13 +34,8 @@ qazy.reveal = function(){
 		if(offsetParentTop > pageYOffset && offsetParentTop < pageYOffset + viewportHeight && offsetParentLeft > pageXOffset && offsetParentLeft < pageXOffset + viewportWidth)
 		{
 			qazy.view_elements[count].src = qazy.view_elements[count].getAttribute("data-qazy-src");
-			/*console.log(qazy.view_elements[count].src);*/
 			qazy.view_elements.splice(count, 1);
 			count--;
-		}
-		else
-		{
-			/*console.log("offsetParentTop" + offsetParentTop + " pageYOffset" + pageYOffset + " viewportHeight" + window.innerHeight);*/
 		}
 	}
 };
