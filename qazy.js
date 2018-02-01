@@ -1,12 +1,12 @@
 window.qazy = window.qazy || {};
 
-qazy.view_elements = [];
+qazy.elems = [];
 
 qazy.reveal = function(){
-	for(var count = 0; count < qazy.view_elements.length; count++)
+	for(var count = 0; count < qazy.elems.length; count++)
 	{
 		var offsetParentTop = 0;
-		var temp = qazy.view_elements[count];
+		var temp = qazy.elems[count];
 		do
 		{
 			if(!isNaN(temp.offsetTop))
@@ -19,7 +19,7 @@ qazy.reveal = function(){
 		var viewportHeight = window.innerHeight;
 		
 		var offsetParentLeft = 0;
-		var temp = qazy.view_elements[count];
+		var temp = qazy.elems[count];
 		do
 		{
 			if(!isNaN(temp.offsetLeft))
@@ -33,8 +33,8 @@ qazy.reveal = function(){
 		
 		if(offsetParentTop > pageYOffset && offsetParentTop < pageYOffset + viewportHeight && offsetParentLeft > pageXOffset && offsetParentLeft < pageXOffset + viewportWidth)
 		{
-			qazy.view_elements[count].src = qazy.view_elements[count].getAttribute("data-qazy-src");
-			qazy.view_elements.splice(count, 1);
+			qazy.elems[count].src = qazy.elems[count].getAttribute("data-qazy-src");
+			qazy.elems.splice(count, 1);
 			count--;
 		}
 	}
@@ -49,7 +49,7 @@ qazy.qazy_list_maker = function(){
 	
 	for(var count = 0; count < elements.length; count++)
 	{
-		qazy.view_elements.push(elements[count]);
+		qazy.elems.push(elements[count]);
 		elements[count].setAttribute("data-qazy", "false");
 		
 		var source_url = elements[count].src;
