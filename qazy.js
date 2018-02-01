@@ -2,7 +2,7 @@ window.qazy = window.qazy || {};
 qazy.img = qazy.img || void(0);
 qazy.elems = qazy.elems || void(0);
 
-qazy.reveal = function(){
+qazy.scan = function(){
 	for(var count = 0; count < qazy.elems.length; count++)
 	{
 		var offsetParentTop = 0;
@@ -40,8 +40,8 @@ qazy.reveal = function(){
 	}
 };
             
-window.addEventListener("resize", qazy.reveal, false);
-window.addEventListener("scroll", qazy.reveal, false);
+window.addEventListener("resize", qazy.scan, false);
+window.addEventListener("scroll", qazy.scan, false);
             
 //responsible for stopping img loading the image from server and also for displaying lazy loading image.
 qazy.qazy_list_maker = function(){
@@ -66,5 +66,5 @@ qazy.intervalObject = setInterval(function(){
 window.addEventListener("load", function() {
 	clearInterval(qazy.intervalObject);
 	qazy.qazy_list_maker();
-	qazy.reveal();
+	qazy.scan();
 }, false);
