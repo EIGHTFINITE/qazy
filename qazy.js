@@ -2,6 +2,16 @@ window.qazy = window.qazy || {};
 qazy.img = qazy.img || void(0);
 qazy.elems = qazy.elems || void(0);
 
+/**
+ * Reveal a single element.
+ */
+qazy.reveal = function(elem) {
+	var qazySrcAttribute = elem.getAttribute("data-qazy-src")
+	if(typeof qazySrcAttribute === "string")
+		elem.src = qazySrcAttribute;
+	elem.removeAttribute("data-qazy-src");
+}
+
 qazy.scan = function(){
 	for(var count = 0; count < qazy.elems.length; count++)
 	{
