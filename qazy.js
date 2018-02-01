@@ -1,5 +1,5 @@
 window.qazy = window.qazy || {};
-
+qazy.img = qazy.img || void(0);
 qazy.elems = [];
 
 qazy.reveal = function(){
