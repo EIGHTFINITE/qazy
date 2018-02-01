@@ -1,6 +1,6 @@
 window.qazy = window.qazy || {};
 qazy.img = qazy.img || void(0);
-qazy.elems = [];
+qazy.elems = qazy.elems || void(0);
 
 qazy.reveal = function(){
 	for(var count = 0; count < qazy.elems.length; count++)
