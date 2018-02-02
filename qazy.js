@@ -100,6 +100,14 @@ qazy.autoHide = function() {
 qazy.intervalObject = setInterval(function(){
 	qazy.autoHide();
 }, 50);
+/**
+ * Code to be run by the interval object.
+ */
+qazy.intervalFunction = function() {
+    qazy.elems = qazy.autoSelect();
+    qazy.autoHide();
+}
+
 
 window.addEventListener("load", function() {
 	clearInterval(qazy.intervalObject);
