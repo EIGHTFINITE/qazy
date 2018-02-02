@@ -81,8 +81,16 @@ qazy.autoReveal = function() {
             
 window.addEventListener("resize", qazy.scan, false);
 window.addEventListener("scroll", qazy.scan, false);
-            
 //responsible for stopping img loading the image from server and also for displaying lazy loading image.
+
+/**
+ * Lazy load the given set of elements.
+ */
+qazy.lazyLoad = function(elems) {
+    for(var i = 0; i < elems.length; i++)
+        qazy.hide(elems[i]);
+}
+
 qazy.autoHide = function(){
 	var elements = document.querySelectorAll("img[data-qazy][data-qazy='true']");
 	
