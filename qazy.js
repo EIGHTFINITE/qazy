@@ -81,7 +81,6 @@ qazy.autoReveal = function() {
             
 window.addEventListener("resize", qazy.scan, false);
 window.addEventListener("scroll", qazy.scan, false);
-//responsible for stopping img loading the image from server and also for displaying lazy loading image.
 
 /**
  * Lazy load the given set of elements.
@@ -91,21 +90,13 @@ qazy.lazyLoad = function(elems) {
         qazy.hide(elems[i]);
 }
 
-qazy.autoHide = function(){
-	var elements = document.querySelectorAll("img[data-qazy][data-qazy='true']");
-	
-	for(var count = 0; count < elements.length; count++)
-	{
-		qazy.elems.push(elements[count]);
-		elements[count].setAttribute("data-qazy", "false");
-		
-		var source_url = elements[count].src;
-		elements[count].setAttribute("data-qazy-src", source_url);
-		
-		elements[count].src = elements[count].getAttribute("data-qazy-placeholder") || qazy.img; 
-	}
-};
-            
+/**
+ * Hide the configured list of elements.
+ */
+qazy.autoHide = function() {
+    qazy.lazyLoad(qazy.elems);
+}
+
 qazy.intervalObject = setInterval(function(){
 	qazy.autoHide();
 }, 50);
