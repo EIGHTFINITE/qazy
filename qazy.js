@@ -1,19 +1,6 @@
 // Create the qazy object if it does not yet exist
 if(!("qazy" in window))
     window.qazy = {};
-// Default url to change images to. Empty by default hiding images
-if(!("img" in qazy))
-    qazy.img = "";
-// Set of elements to automatically hide/reveal. (You can also just pass a set
-// to the scan and lazyLoad functions instead of setting it here.)
-if(!("elems" in qazy))
-    qazy.elems = qazy.autoSelect();
-// Set to 0 or higher to catch any late images. Elems are overridden every run
-if(!("interval" in qazy))
-    qazy.interval = -1;
-// Set to true to prevent automatic setup
-if(!("preventSetup" in qazy))
-    qazy.preventSetup = false;
 
 /**
  * Reveal a single element.
@@ -165,6 +152,20 @@ if(!("setup" in qazy)) {
         }
     }
 }
+
+// Default url to change images to. Empty by default hiding images
+if(!("img" in qazy))
+    qazy.img = "";
+// Set of elements to automatically hide/reveal. (You can also just pass a set
+// to the scan and lazyLoad functions instead of setting it here.)
+if(!("elems" in qazy))
+    qazy.elems = qazy.autoSelect();
+// Set to 0 or higher to catch any late images. Elems are overridden every run
+if(!("interval" in qazy))
+    qazy.interval = -1;
+// Set to true to prevent automatic setup
+if(!("preventSetup" in qazy))
+    qazy.preventSetup = false;
 
 // Run the setup
 if(!qazy.preventSetup)
