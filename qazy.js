@@ -1,6 +1,9 @@
-window.qazy = window.qazy || {};
-qazy.img = qazy.img || void(0);
-qazy.elems = qazy.elems || void(0);
+if(!("qazy" in window))
+    window.qazy = {};
+if(!("img" in qazy))
+    qazy.img = void(0);
+if(!("elems" in qazy))
+    qazy.elems = void(0);
 
 /**
  * Reveal a single element.
