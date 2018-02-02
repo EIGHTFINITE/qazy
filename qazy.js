@@ -33,9 +33,7 @@ if(!("isVisible" in qazy)) {
     qazy.isVisible = function(elem) {
         var tempElem = elem;
         while(true) {
-            if(tempElem.nodeType !== 1)
-                return false;
-            if(tempElem.offsetWidth || tempElem.offsetHeight || tempElem.getClientRects().length)
+            if(tempElem.nodeType !== 1 || !tempElem.getClientRects().length)
                 return false;
             if(window.getComputedStyle) {
                 if(document.defaultView.getComputedStyle(tempElem)['opacity'] === '0' || document.defaultView.getComputedStyle(tempElem)['display'] === 'none' || document.defaultView.getComputedStyle(tempElem)['visibility'] === 'hidden')
