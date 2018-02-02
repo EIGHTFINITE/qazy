@@ -76,7 +76,7 @@ window.addEventListener("resize", qazy.scan, false);
 window.addEventListener("scroll", qazy.scan, false);
             
 //responsible for stopping img loading the image from server and also for displaying lazy loading image.
-qazy.qazy_list_maker = function(){
+qazy.autoHide = function(){
 	var elements = document.querySelectorAll("img[data-qazy][data-qazy='true']");
 	
 	for(var count = 0; count < elements.length; count++)
@@ -92,11 +92,11 @@ qazy.qazy_list_maker = function(){
 };
             
 qazy.intervalObject = setInterval(function(){
-	qazy.qazy_list_maker();
+	qazy.autoHide();
 }, 50);
 
 window.addEventListener("load", function() {
 	clearInterval(qazy.intervalObject);
-	qazy.qazy_list_maker();
+	qazy.autoHide();
 	qazy.scan();
 }, false);
