@@ -64,6 +64,13 @@ qazy.scan = function(elems) {
             qazy.reveal(elems[i]);
     }
 }
+
+/**
+ * Scan the configured list of elements and reveal the visible elements.
+ */
+qazy.autoReveal = function() {
+    qazy.scan(qazy.elems);
+}
             
 window.addEventListener("resize", qazy.scan, false);
 window.addEventListener("scroll", qazy.scan, false);
