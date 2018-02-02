@@ -18,129 +18,151 @@ if(!("preventSetup" in qazy))
 /**
  * Reveal a single element.
  */
-qazy.reveal = function(elem) {
-	var qazySrcAttribute = elem.getAttribute("data-qazy-src")
-	if(typeof qazySrcAttribute === "string")
-		elem.src = qazySrcAttribute;
-	elem.removeAttribute("data-qazy-src");
+if(!("reveal" in qazy)) {
+    qazy.reveal = function(elem) {
+        var qazySrcAttribute = elem.getAttribute("data-qazy-src")
+        if(typeof qazySrcAttribute === "string")
+            elem.src = qazySrcAttribute;
+        elem.removeAttribute("data-qazy-src");
+    }
 }
 
 /**
  * Hide a single element.
  */
-qazy.hide = function(elem) {
-    if(elem.getAttribute("data-qazy-src") === null) {
-        elem.setAttribute("data-qazy-src", elem.src);
-        elem.src = qazy.img;
+if(!("hide" in qazy)) {
+    qazy.hide = function(elem) {
+        if(elem.getAttribute("data-qazy-src") === null) {
+            elem.setAttribute("data-qazy-src", elem.src);
+            elem.src = qazy.img;
+        }
     }
 }
 
 /**
  * Returns whether an element is visible to the user.
  */
-qazy.isVisible = function(elem) {
-    var tempElem = elem;
-    while(true) {
-        if(tempElem.nodeType !== 1)
-            return false;
-        if(tempElem.offsetWidth || tempElem.offsetHeight || tempElem.getClientRects().length)
-            return false;
-        if(window.getComputedStyle) {
-            if(document.defaultView.getComputedStyle(tempElem)['opacity'] === '0' || document.defaultView.getComputedStyle(tempElem)['display'] === 'none' || document.defaultView.getComputedStyle(tempElem)['visibility'] === 'hidden')
+if(!("isVisible" in qazy)) {
+    qazy.isVisible = function(elem) {
+        var tempElem = elem;
+        while(true) {
+            if(tempElem.nodeType !== 1)
                 return false;
-        }
-        else {
-            if(tempElem.currentStyle['opacity'] === '0' || tempElem.currentStyle['display'] === 'none' || tempElem.currentStyle['visibility'] === 'hidden')
+            if(tempElem.offsetWidth || tempElem.offsetHeight || tempElem.getClientRects().length)
                 return false;
+            if(window.getComputedStyle) {
+                if(document.defaultView.getComputedStyle(tempElem)['opacity'] === '0' || document.defaultView.getComputedStyle(tempElem)['display'] === 'none' || document.defaultView.getComputedStyle(tempElem)['visibility'] === 'hidden')
+                    return false;
+            }
+            else {
+                if(tempElem.currentStyle['opacity'] === '0' || tempElem.currentStyle['display'] === 'none' || tempElem.currentStyle['visibility'] === 'hidden')
+                    return false;
+            }
+            if(tempElem === document.documentElement)
+                break;
+            if(tempElem.parentNode === null)
+                return false;
+            tempElem = tempElem.parentNode;
         }
-        if(tempElem === document.documentElement)
-            break;
-        if(tempElem.parentNode === null)
+        var elemDomRect = elem.getBoundingClientRect();
+        if(elemDomRect.top > window.innerHeight || elemDomRect.left > window.innerWidth || elemDomRect.bottom < 0 || elemDomRect.right < 0)
             return false;
-        tempElem = tempElem.parentNode;
+        return true;
     }
-    var elemDomRect = elem.getBoundingClientRect();
-    if(elemDomRect.top > window.innerHeight || elemDomRect.left > window.innerWidth || elemDomRect.bottom < 0 || elemDomRect.right < 0)
-        return false;
-    return true;
 }
 
 /**
  * Return a standard list of elements to lazy load.
  */
-qazy.autoSelect = function() {
-    return document.getElementsByTagName("IMG");
+if(!("autoSelect" in qazy)) {
+    qazy.autoSelect = function() {
+        return document.getElementsByTagName("IMG");
+    }
 }
 
 /**
  * Scan the given set of elements and reveal the visible elements.
  */
-qazy.scan = function(elems) {
-    for(var i = 0; i < elems.length; i++) {
-        if(qazy.isVisible(elems[i]))
-            qazy.reveal(elems[i]);
+if(!("scan" in qazy)) {
+    qazy.scan = function(elems) {
+        for(var i = 0; i < elems.length; i++) {
+            if(qazy.isVisible(elems[i]))
+                qazy.reveal(elems[i]);
+        }
     }
 }
 
 /**
  * Scan the configured list of elements and reveal the visible elements.
  */
-qazy.autoReveal = function() {
-    qazy.scan(qazy.elems);
+if(!("autoReveal" in qazy)) {
+    qazy.autoReveal = function() {
+        qazy.scan(qazy.elems);
+    }
 }
 
 /**
  * Lazy load the given set of elements.
  */
-qazy.lazyLoad = function(elems) {
-    for(var i = 0; i < elems.length; i++)
-        qazy.hide(elems[i]);
+if(!("lazyLoad" in qazy)) {
+    qazy.lazyLoad = function(elems) {
+        for(var i = 0; i < elems.length; i++)
+            qazy.hide(elems[i]);
+    }
 }
 
 /**
  * Hide the configured list of elements.
  */
-qazy.autoHide = function() {
-    qazy.lazyLoad(qazy.elems);
+if(!("autoHide" in qazy)) {
+    qazy.autoHide = function() {
+        qazy.lazyLoad(qazy.elems);
+    }
 }
 
 /**
  * Code to be run by the interval object.
  */
-qazy.intervalFunction = function() {
-    qazy.elems = qazy.autoSelect();
-    qazy.autoHide();
+if(!("intervalFunction" in qazy)) {
+    qazy.intervalFunction = function() {
+        qazy.elems = qazy.autoSelect();
+        qazy.autoHide();
+    }
 }
 
 /**
  * Code to be run when the page is loaded.
  */
-qazy.onload = function() {
-    if(qazy.interval >= 0) {
-        // Run the interval code one last time
-        qazy.intervalFunction();
-        clearInterval(qazy.intervalObject);
+if(!("onload" in qazy)) {
+    qazy.onload = function() {
+        if(qazy.interval >= 0) {
+            // Run the interval code one last time
+            qazy.intervalFunction();
+            clearInterval(qazy.intervalObject);
+        }
+        qazy.autoHide();
+        qazy.autoReveal();
     }
-    qazy.autoHide();
-    qazy.autoReveal();
 }
 
 /**
  * Sets up the listeners to automatically lazy load images.
  */
-qazy.setup = function() {
-    if(qazy.interval >= 0) {
-        qazy.intervalObject = setInterval(qazy.intervalFunction, qazy.interval);
-    }
-    if(window.addEventListener) {
-        window.addEventListener("resize", qazy.autoReveal, false);
-        window.addEventListener("scroll", qazy.autoReveal, false);
-        window.addEventListener("load", qazy.onload, false);
-    }
-    else {
-        window.attachEvent("onresize", qazy.autoReveal);
-        window.attachEvent("onscroll", qazy.autoReveal);
-        window.attachEvent("onload", qazy.onload);
+if(!("setup" in qazy)) {
+    qazy.setup = function() {
+        if(qazy.interval >= 0) {
+            qazy.intervalObject = setInterval(qazy.intervalFunction, qazy.interval);
+        }
+        if(window.addEventListener) {
+            window.addEventListener("resize", qazy.autoReveal, false);
+            window.addEventListener("scroll", qazy.autoReveal, false);
+            window.addEventListener("load", qazy.onload, false);
+        }
+        else {
+            window.attachEvent("onresize", qazy.autoReveal);
+            window.attachEvent("onscroll", qazy.autoReveal);
+            window.attachEvent("onload", qazy.onload);
+        }
     }
 }
 
