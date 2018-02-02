@@ -56,6 +56,13 @@ qazy.isVisible = function(elem) {
 }
 
 /**
+ * Return a standard list of elements to lazy load.
+ */
+qazy.autoSelect = function() {
+    return document.getElementsByTagName("IMG");
+}
+
+/**
  * Scan the given set of elements and reveal the visible elements.
  */
 qazy.scan = function(elems) {
