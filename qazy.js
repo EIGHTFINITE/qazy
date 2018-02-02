@@ -88,11 +88,15 @@ if(!("autoReveal" in qazy)) {
 
 /**
  * Lazy load the given set of elements.
+ *
+ * Elements will not be hidden if they are already visible.
  */
 if(!("lazyLoad" in qazy)) {
     qazy.lazyLoad = function(elems) {
-        for(var i = 0; i < elems.length; i++)
-            qazy.hide(elems[i]);
+        for(var i = 0; i < elems.length; i++) {
+            if(!qazy.isVisible(elems[i]))
+                qazy.hide(elems[i]);
+        }
     }
 }
 
