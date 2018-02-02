@@ -137,3 +137,5 @@ qazy.setup = function() {
     }
 }
 
+// Run the setup
+qazy.setup();
