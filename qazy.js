@@ -7,6 +7,9 @@ if(!("elems" in qazy))
 // Set to 0 or higher to catch any late images. Elems are overridden every run
 if(!("interval" in qazy))
     qazy.interval = -1;
+// Set to true to prevent automatic setup
+if(!("preventSetup" in qazy))
+    qazy.preventSetup = false;
 
 /**
  * Reveal a single element.
@@ -138,4 +141,5 @@ qazy.setup = function() {
 }
 
 // Run the setup
-qazy.setup();
+if(!qazy.preventSetup)
+    qazy.setup();
