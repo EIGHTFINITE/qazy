@@ -4,6 +4,9 @@ if(!("img" in qazy))
     qazy.img = "";
 if(!("elems" in qazy))
     qazy.elems = qazy.autoSelect();
+// Set to 0 or higher to catch any late images. Elems are overridden every run
+if(!("interval" in qazy))
+    qazy.interval = -1;
 
 /**
  * Reveal a single element.
