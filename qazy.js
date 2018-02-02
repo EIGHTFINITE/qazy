@@ -1,7 +1,7 @@
 if(!("qazy" in window))
     window.qazy = {};
 if(!("img" in qazy))
-    qazy.img = void(0);
+    qazy.img = "";
 if(!("elems" in qazy))
     qazy.elems = void(0);
 
