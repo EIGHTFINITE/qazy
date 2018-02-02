@@ -3,7 +3,7 @@ if(!("qazy" in window))
 if(!("img" in qazy))
     qazy.img = "";
 if(!("elems" in qazy))
-    qazy.elems = void(0);
+    qazy.elems = qazy.autoSelect();
 
 /**
  * Reveal a single element.
