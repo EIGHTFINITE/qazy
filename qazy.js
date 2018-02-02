@@ -55,43 +55,15 @@ qazy.isVisible = function(elem) {
     return true;
 }
 
-qazy.scan = function(){
-	for(var count = 0; count < qazy.elems.length; count++)
-	{
-		var offsetParentTop = 0;
-		var temp = qazy.elems[count];
-		do
-		{
-			if(!isNaN(temp.offsetTop))
-			{
-				offsetParentTop += temp.offsetTop;
-			}
-		}while(temp = temp.offsetParent)
-		
-		var pageYOffset = window.pageYOffset;
-		var viewportHeight = window.innerHeight;
-		
-		var offsetParentLeft = 0;
-		var temp = qazy.elems[count];
-		do
-		{
-			if(!isNaN(temp.offsetLeft))
-			{
-				offsetParentLeft += temp.offsetLeft;
-			}
-		}while(temp = temp.offsetParent);
-		
-		var pageXOffset = window.pageXOffset;
-		var viewportWidth = window.innerWidth;
-		
-		if(offsetParentTop > pageYOffset && offsetParentTop < pageYOffset + viewportHeight && offsetParentLeft > pageXOffset && offsetParentLeft < pageXOffset + viewportWidth)
-		{
-			qazy.elems[count].src = qazy.elems[count].getAttribute("data-qazy-src");
-			qazy.elems.splice(count, 1);
-			count--;
-		}
-	}
-};
+/**
+ * Scan the given set of elements and reveal the visible elements.
+ */
+qazy.scan = function(elems) {
+    for(var i = 0; i < elems.length; i++) {
+        if(qazy.isVisible(elems[i]))
+            qazy.reveal(elems[i]);
+    }
+}
             
 window.addEventListener("resize", qazy.scan, false);
 window.addEventListener("scroll", qazy.scan, false);
