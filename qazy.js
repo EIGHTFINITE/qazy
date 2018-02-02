@@ -15,6 +15,16 @@ qazy.reveal = function(elem) {
 	elem.removeAttribute("data-qazy-src");
 }
 
+/**
+ * Hide a single element.
+ */
+qazy.hide = function(elem) {
+    if(elem.getAttribute("data-qazy-src") === null) {
+        elem.setAttribute("data-qazy-src", elem.src);
+        elem.src = qazy.img;
+    }
+}
+
 qazy.scan = function(){
 	for(var count = 0; count < qazy.elems.length; count++)
 	{
