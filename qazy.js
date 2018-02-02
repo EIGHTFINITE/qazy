@@ -108,6 +108,19 @@ qazy.intervalFunction = function() {
     qazy.autoHide();
 }
 
+/**
+ * Code to be run when the page is loaded.
+ */
+qazy.onload = function() {
+    if(qazy.interval >= 0) {
+        // Run the interval code one last time
+        qazy.intervalFunction();
+        clearInterval(qazy.intervalObject);
+    }
+    qazy.autoHide();
+    qazy.autoReveal();
+}
+
 
 window.addEventListener("load", function() {
 	clearInterval(qazy.intervalObject);
