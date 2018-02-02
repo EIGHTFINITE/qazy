@@ -25,6 +25,36 @@ qazy.hide = function(elem) {
     }
 }
 
+/**
+ * Returns whether an element is visible to the user.
+ */
+qazy.isVisible = function(elem) {
+    var tempElem = elem;
+    while(true) {
+        if(tempElem.nodeType !== 1)
+            return false;
+        if(tempElem.offsetWidth || tempElem.offsetHeight || tempElem.getClientRects().length)
+            return false;
+        if(window.getComputedStyle) {
+            if(document.defaultView.getComputedStyle(tempElem)['opacity'] === '0' || document.defaultView.getComputedStyle(tempElem)['display'] === 'none' || document.defaultView.getComputedStyle(tempElem)['visibility'] === 'hidden')
+                return false;
+        }
+        else {
+            if(tempElem.currentStyle['opacity'] === '0' || tempElem.currentStyle['display'] === 'none' || tempElem.currentStyle['visibility'] === 'hidden')
+                return false;
+        }
+        if(tempElem === document.documentElement)
+            break;
+        if(tempElem.parentNode === null)
+            return false;
+        tempElem = tempElem.parentNode;
+    }
+    var elemDomRect = elem.getBoundingClientRect();
+    if(elemDomRect.top > window.innerHeight || elemDomRect.left > window.innerWidth || elemDomRect.bottom < 0 || elemDomRect.right < 0)
+        return false;
+    return true;
+}
+
 qazy.scan = function(){
 	for(var count = 0; count < qazy.elems.length; count++)
 	{
