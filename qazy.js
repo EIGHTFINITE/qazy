@@ -78,9 +78,6 @@ qazy.scan = function(elems) {
 qazy.autoReveal = function() {
     qazy.scan(qazy.elems);
 }
-            
-window.addEventListener("resize", qazy.scan, false);
-window.addEventListener("scroll", qazy.scan, false);
 
 /**
  * Lazy load the given set of elements.
@@ -97,9 +94,6 @@ qazy.autoHide = function() {
     qazy.lazyLoad(qazy.elems);
 }
 
-qazy.intervalObject = setInterval(function(){
-	qazy.autoHide();
-}, 50);
 /**
  * Code to be run by the interval object.
  */
@@ -121,9 +115,22 @@ qazy.onload = function() {
     qazy.autoReveal();
 }
 
+/**
+ * Sets up the listeners to automatically lazy load images.
+ */
+qazy.setup = function() {
+    if(qazy.interval >= 0) {
+        qazy.intervalObject = setInterval(qazy.intervalFunction, qazy.interval);
+    }
+    if(window.addEventListener) {
+        window.addEventListener("resize", qazy.autoReveal, false);
+        window.addEventListener("scroll", qazy.autoReveal, false);
+        window.addEventListener("load", qazy.onload, false);
+    }
+    else {
+        window.attachEvent("onresize", qazy.autoReveal);
+        window.attachEvent("onscroll", qazy.autoReveal);
+        window.attachEvent("onload", qazy.onload);
+    }
+}
 
-window.addEventListener("load", function() {
-	clearInterval(qazy.intervalObject);
-	qazy.autoHide();
-	qazy.scan();
-}, false);
