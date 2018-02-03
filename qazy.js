@@ -67,13 +67,20 @@ if(!("autoSelect" in qazy)) {
 
 /**
  * Scan the given set of elements and reveal the visible elements.
+ *
+ * @param {(Array|HTMLCollection)} elems - The set of elements to scan.
+ * @param {boolean=} force - (Optional) Reveal all elements.
+ *
+ * @returns {number} - Number of elements that were revealed.
  */
 if(!("scan" in qazy)) {
-    qazy.scan = function(elems) {
+    qazy.scan = function(elems, force) {
+        var count = 0;
         for(var i = 0; i < elems.length; i++) {
-            if(qazy.isVisible(elems[i]))
-                qazy.reveal(elems[i]);
+            if(force || qazy.isVisible(elems[i]))
+                count += qazy.reveal(elems[i]);
         }
+        return count;
     }
 }
 
