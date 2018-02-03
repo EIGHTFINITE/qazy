@@ -6,14 +6,15 @@ if(!("qazy" in window))
  * Reveal a single element.
  *
  * @param {HTMLElement} elem - Element to be revealed.
+ * @param {boolean=} ignorePlaceholder - (Optional) Ignore placeholder.
  *
  * @returns {boolean} - Success.
  */
 if(!("reveal" in qazy)) {
-    qazy.reveal = function(elem) {
+    qazy.reveal = function(elem, ignorePlaceholder) {
         var success = false;
         var qazyPlaceholderAttribute = elem.getAttribute("data-qazy-placeholder");
-        if(typeof qazyPlaceholderAttribute === "string") {
+        if(!ignorePlaceholder && typeof qazyPlaceholderAttribute === "string") {
             elem.src = qazyPlaceholderAttribute;
             success = true;
         }
