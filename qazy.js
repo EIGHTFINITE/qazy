@@ -179,6 +179,24 @@ if(!("onload" in qazy)) {
 }
 
 /**
+ * Code to be run when the page is resized.
+ */
+if(!("onresize" in qazy)) {
+    qazy.onresize = function() {
+        qazy.autoReveal();
+    }
+}
+
+/**
+ * Code to be run when the page is scrolled.
+ */
+if(!("onscroll" in qazy)) {
+    qazy.onscroll = function() {
+        qazy.autoReveal();
+    }
+}
+
+/**
  * Sets up the listeners to automatically lazy load images.
  */
 if(!("setup" in qazy)) {
@@ -187,13 +205,13 @@ if(!("setup" in qazy)) {
             qazy.intervalObject = setInterval(qazy.intervalFunction, qazy.interval);
         }
         if(window.addEventListener) {
-            window.addEventListener("resize", qazy.autoReveal, false);
-            window.addEventListener("scroll", qazy.autoReveal, false);
+            window.addEventListener("resize", qazy.onresize, false);
+            window.addEventListener("scroll", qazy.onscroll, false);
             window.addEventListener("load", qazy.onload, false);
         }
         else {
-            window.attachEvent("onresize", qazy.autoReveal);
-            window.attachEvent("onscroll", qazy.autoReveal);
+            window.attachEvent("onresize", qazy.onresize);
+            window.attachEvent("onscroll", qazy.onscroll);
             window.attachEvent("onload", qazy.onload);
         }
         qazy.autoHide();
