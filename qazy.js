@@ -41,6 +41,10 @@ if(!("hide" in qazy)) {
 
 /**
  * Returns whether an element is visible to the user.
+ *
+ * @param {HTMLElement} elem - Element to be checked for visibility.
+ *
+ * @returns {boolean} - Visibility.
  */
 if(!("isVisible" in qazy)) {
     qazy.isVisible = function(elem) {
