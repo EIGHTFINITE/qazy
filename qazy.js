@@ -160,6 +160,7 @@ if(!("intervalFunction" in qazy)) {
     qazy.intervalFunction = function() {
         qazy.elems = qazy.autoSelect();
         qazy.autoHide();
+        qazy.autoReveal();
     }
 }
 
