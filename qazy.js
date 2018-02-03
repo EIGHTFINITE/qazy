@@ -196,6 +196,8 @@ if(!("setup" in qazy)) {
             window.attachEvent("onscroll", qazy.autoReveal);
             window.attachEvent("onload", qazy.onload);
         }
+        qazy.autoHide();
+        qazy.autoReveal();
     }
 }
 
