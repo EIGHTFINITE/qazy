@@ -1,6 +1,8 @@
 // Create the qazy object if it does not yet exist
 if(!("qazy" in window))
     window.qazy = {};
+// Current version. This is the one thing you can't override
+qazy.version = "1.0.0";
 
 /**
  * Reveal a single element.
