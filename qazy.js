@@ -24,13 +24,18 @@ if(!("reveal" in qazy)) {
 
 /**
  * Hide a single element.
+ *
+ * @param {HTMLElement} elem - Element to be hidden.
+ *
+ * @returns {boolean} - Success.
  */
 if(!("hide" in qazy)) {
     qazy.hide = function(elem) {
-        if(elem.getAttribute("data-qazy-src") === null) {
-            elem.setAttribute("data-qazy-src", elem.src);
-            elem.src = qazy.img;
-        }
+        if(elem.getAttribute("data-qazy-src") !== null)
+            return false;
+        elem.setAttribute("data-qazy-src", elem.src);
+        elem.src = qazy.img;
+        return true;
     }
 }
 
