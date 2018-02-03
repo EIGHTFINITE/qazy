@@ -89,14 +89,19 @@ if(!("autoReveal" in qazy)) {
 /**
  * Lazy load the given set of elements.
  *
- * Elements will not be hidden if they are already visible.
+ * @param {(Array|HTMLCollection)} elems - The set of elements to lazy load.
+ * @param {boolean=} force - (Optional) Lazy load elements even if they are visible.
+ *
+ * @returns {number} - Number of elements that were lazy loaded.
  */
 if(!("lazyLoad" in qazy)) {
-    qazy.lazyLoad = function(elems) {
+    qazy.lazyLoad = function(elems, force) {
+        var count = 0;
         for(var i = 0; i < elems.length; i++) {
-            if(!qazy.isVisible(elems[i]))
-                qazy.hide(elems[i]);
+            if(force || !qazy.isVisible(elems[i]))
+                count += qazy.hide(elems[i]);
         }
+        return count;
     }
 }
 
