@@ -1,3 +1,5 @@
+/*! Qazy 1.0.0 | MIT License | https://github.com/EIGHTFINITE/qazy */
+
 (function(){
 "use strict";
 
