@@ -105,10 +105,12 @@ if(!("scan" in qazy)) {
 
 /**
  * Scan the configured list of elements and reveal the visible elements.
+ *
+ * @returns {number} - Number of elements that were revealed.
  */
 if(!("autoReveal" in qazy)) {
     qazy.autoReveal = function() {
-        qazy.scan(qazy.elems);
+        return qazy.scan(qazy.elems);
     }
 }
 
