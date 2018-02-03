@@ -4,13 +4,21 @@ if(!("qazy" in window))
 
 /**
  * Reveal a single element.
+ *
+ * @param {HTMLElement} elem - Element to be revealed.
+ *
+ * @returns {boolean} - Success.
  */
 if(!("reveal" in qazy)) {
     qazy.reveal = function(elem) {
+        var success = false;
         var qazySrcAttribute = elem.getAttribute("data-qazy-src")
-        if(typeof qazySrcAttribute === "string")
+        if(typeof qazySrcAttribute === "string") {
             elem.src = qazySrcAttribute;
+            success = true;
+        }
         elem.removeAttribute("data-qazy-src");
+        return success;
     }
 }
 
