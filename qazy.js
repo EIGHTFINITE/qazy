@@ -3,51 +3,31 @@ if(!("qazy" in window))
     window.qazy = {};
 // Current version. This is the one thing you can't override
 qazy.version = "1.0.0";
+// Default url to change images to. Empty by default hiding images
+if(!("img" in qazy))
+    qazy.img = "";
+// Set to 0 or higher to catch any late images. Elems are overridden every run
+if(!("interval" in qazy))
+    qazy.interval = -1;
+// Set to true to prevent automatic setup
+if(!("preventSetup" in qazy))
+    qazy.preventSetup = false;
 
 /**
- * Reveal a single element.
+ * Return a standard list of elements to lazy load.
  *
- * @param {HTMLElement} elem - Element to be revealed.
- * @param {boolean=} ignorePlaceholder - (Optional) Ignore placeholder.
- *
- * @returns {boolean} - Success.
+ * @returns {HTMLCollection} - A standard list of elements to lazy load.
  */
-if(!("reveal" in qazy)) {
-    qazy.reveal = function(elem, ignorePlaceholder) {
-        var success = false;
-        var qazyPlaceholderAttribute = elem.getAttribute("data-qazy-placeholder");
-        if(!ignorePlaceholder && typeof qazyPlaceholderAttribute === "string") {
-            elem.src = qazyPlaceholderAttribute;
-            success = true;
-        }
-        else {
-            var qazySrcAttribute = elem.getAttribute("data-qazy-src");
-            if(typeof qazySrcAttribute === "string") {
-                elem.src = qazySrcAttribute;
-                success = true;
-            }
-        }
-        elem.removeAttribute("data-qazy-src");
-        return success;
+if(!("autoSelect" in qazy)) {
+    qazy.autoSelect = function() {
+        return document.getElementsByTagName("IMG");
     }
 }
 
-/**
- * Hide a single element.
- *
- * @param {HTMLElement} elem - Element to be hidden.
- *
- * @returns {boolean} - Success.
- */
-if(!("hide" in qazy)) {
-    qazy.hide = function(elem) {
-        if(elem.getAttribute("data-qazy-src") !== null)
-            return false;
-        elem.setAttribute("data-qazy-src", elem.src);
-        elem.src = qazy.img;
-        return true;
-    }
-}
+// Set of elements to automatically hide/reveal. (You can also just pass a set
+// to the scan and lazyLoad functions instead of setting it here.)
+if(!("elems" in qazy))
+    qazy.elems = qazy.autoSelect();
 
 /**
  * Returns whether an element is visible to the user.
@@ -84,13 +64,30 @@ if(!("isVisible" in qazy)) {
 }
 
 /**
- * Return a standard list of elements to lazy load.
+ * Reveal a single element.
  *
- * @returns {HTMLCollection} - A standard list of elements to lazy load.
+ * @param {HTMLElement} elem - Element to be revealed.
+ * @param {boolean=} ignorePlaceholder - (Optional) Ignore placeholder.
+ *
+ * @returns {boolean} - Success.
  */
-if(!("autoSelect" in qazy)) {
-    qazy.autoSelect = function() {
-        return document.getElementsByTagName("IMG");
+if(!("reveal" in qazy)) {
+    qazy.reveal = function(elem, ignorePlaceholder) {
+        var success = false;
+        var qazyPlaceholderAttribute = elem.getAttribute("data-qazy-placeholder");
+        if(!ignorePlaceholder && typeof qazyPlaceholderAttribute === "string") {
+            elem.src = qazyPlaceholderAttribute;
+            success = true;
+        }
+        else {
+            var qazySrcAttribute = elem.getAttribute("data-qazy-src");
+            if(typeof qazySrcAttribute === "string") {
+                elem.src = qazySrcAttribute;
+                success = true;
+            }
+        }
+        elem.removeAttribute("data-qazy-src");
+        return success;
     }
 }
 
@@ -122,6 +119,23 @@ if(!("scan" in qazy)) {
 if(!("autoReveal" in qazy)) {
     qazy.autoReveal = function() {
         return qazy.scan(qazy.elems);
+    }
+}
+
+/**
+ * Hide a single element.
+ *
+ * @param {HTMLElement} elem - Element to be hidden.
+ *
+ * @returns {boolean} - Success.
+ */
+if(!("hide" in qazy)) {
+    qazy.hide = function(elem) {
+        if(elem.getAttribute("data-qazy-src") !== null)
+            return false;
+        elem.setAttribute("data-qazy-src", elem.src);
+        elem.src = qazy.img;
+        return true;
     }
 }
 
@@ -221,20 +235,6 @@ if(!("setup" in qazy)) {
         qazy.autoReveal();
     }
 }
-
-// Default url to change images to. Empty by default hiding images
-if(!("img" in qazy))
-    qazy.img = "";
-// Set of elements to automatically hide/reveal. (You can also just pass a set
-// to the scan and lazyLoad functions instead of setting it here.)
-if(!("elems" in qazy))
-    qazy.elems = qazy.autoSelect();
-// Set to 0 or higher to catch any late images. Elems are overridden every run
-if(!("interval" in qazy))
-    qazy.interval = -1;
-// Set to true to prevent automatic setup
-if(!("preventSetup" in qazy))
-    qazy.preventSetup = false;
 
 // Run the setup
 if(!qazy.preventSetup)
