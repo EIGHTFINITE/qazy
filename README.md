@@ -59,15 +59,20 @@ Want to control exactly how Qazy functions? Override variables and functions and
           qazy.autoHide = function() {
               qazy.lazyLoad(qazy.elems, true);
           }
-          callWhenReady = qazy.setup;
+          callWhenReady = function(){
+              qazy.setup();
+          }
         </script>
         <script src="qazy.js"></script>
         <script>
           function createMoreImages() {
-              return [
-                  document.body.appendChild(document.createElement("img")).src = "https://example.com/01.png",
-                  document.body.appendChild(document.createElement("img")).src = "https://example.com/02.png"
-              ];
+              var image1 = document.createElement("img");
+              var image2 = document.createElement("img");
+              image1.src = "https://example.com/01.png";
+              image2.src = "https://example.com/02.png";
+              document.body.appendChild(image1);
+              document.body.appendChild(image2);
+              return [image1, image2];
           }
           qazy.elems = Array.prototype.slice.call(qazy.elems).concat(createMoreImages());
           callWhenReady();
