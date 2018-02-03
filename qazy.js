@@ -12,10 +12,17 @@ if(!("qazy" in window))
 if(!("reveal" in qazy)) {
     qazy.reveal = function(elem) {
         var success = false;
-        var qazySrcAttribute = elem.getAttribute("data-qazy-src")
-        if(typeof qazySrcAttribute === "string") {
-            elem.src = qazySrcAttribute;
+        var qazyPlaceholderAttribute = elem.getAttribute("data-qazy-placeholder");
+        if(typeof qazyPlaceholderAttribute === "string") {
+            elem.src = qazyPlaceholderAttribute;
             success = true;
+        }
+        else {
+            var qazySrcAttribute = elem.getAttribute("data-qazy-src");
+            if(typeof qazySrcAttribute === "string") {
+                elem.src = qazySrcAttribute;
+                success = true;
+            }
         }
         elem.removeAttribute("data-qazy-src");
         return success;
