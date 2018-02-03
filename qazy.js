@@ -1,3 +1,5 @@
+(function(){
+
 // Create the qazy object if it does not yet exist
 if(!("qazy" in window))
     window.qazy = {};
@@ -239,3 +241,5 @@ if(!("setup" in qazy)) {
 // Run the setup
 if(!qazy.preventSetup)
     qazy.setup();
+
+})();
