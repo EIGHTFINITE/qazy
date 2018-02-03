@@ -133,10 +133,12 @@ if(!("lazyLoad" in qazy)) {
 
 /**
  * Hide the configured list of elements.
+ *
+ * @returns {number} - Number of elements that were lazy loaded.
  */
 if(!("autoHide" in qazy)) {
     qazy.autoHide = function() {
-        qazy.lazyLoad(qazy.elems);
+        return qazy.lazyLoad(qazy.elems);
     }
 }
 
