@@ -97,15 +97,16 @@ if(!("autoSelect" in qazy)) {
  *
  * @param {(Array|HTMLCollection)} elems - The set of elements to scan.
  * @param {boolean=} force - (Optional) Reveal all elements.
+ * @param {boolean=} ignorePlaceholder - (Optional) Ignore placeholders.
  *
  * @returns {number} - Number of elements that were revealed.
  */
 if(!("scan" in qazy)) {
-    qazy.scan = function(elems, force) {
+    qazy.scan = function(elems, force, ignorePlaceholder) {
         var count = 0;
         for(var i = 0; i < elems.length; i++) {
             if(force || qazy.isVisible(elems[i]))
-                count += qazy.reveal(elems[i]);
+                count += qazy.reveal(elems[i], ignorePlaceholder);
         }
         return count;
     }
