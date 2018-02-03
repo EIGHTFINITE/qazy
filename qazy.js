@@ -75,6 +75,8 @@ if(!("isVisible" in qazy)) {
 
 /**
  * Return a standard list of elements to lazy load.
+ *
+ * @returns {HTMLCollection} - A standard list of elements to lazy load.
  */
 if(!("autoSelect" in qazy)) {
     qazy.autoSelect = function() {
